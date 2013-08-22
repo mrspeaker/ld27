@@ -1,0 +1,19 @@
+body {
+	background-color: #333;
+}
+
+section {
+	margin: 40px auto;
+	text-align: center;
+}
+
+#fullscreenahead {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	display: block;
+	width: 32px;
+	height: 32px;
+	border-radius: 16px;
+	background-color: rgba(0, 0, 0, 0.2);
+}

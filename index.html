@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="user-scalable=0, initial-scale=1.0" />
+	<title>LD27</title>
+	<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+	<section>
+		<canvas id="board"></canvas>
+	</section>
+	<span id="fullscreenahead"></span>
+
+	<script src="lib/Ω500.js"></script>
+	<script src="scripts/screens/TitleScreen.js"></script>
+	<script src="scripts/ld27.js"></script>
+	<script>
+
+		var game = new LD27(640, 400);
+
+		// Go fullscreen
+		document
+			.querySelector("#fullscreenahead")
+			.addEventListener("click", function () {
+
+				Ω.utils.fullscreen.toggle("#board");
+
+			}, false);
+
+	</script>
+</body>
+</html>
