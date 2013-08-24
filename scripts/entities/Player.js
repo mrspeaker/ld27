@@ -13,6 +13,8 @@
 
 		happiness: 50,
 
+		depth: 0,
+
 		init: function (x, y) {
 
 			this.x = x;
@@ -47,9 +49,15 @@
 				this.yo = -this.speed * Math.sin(this.rotation);
 			}
 
+						// Bit sad to move
+			if (this.xo !== 0 || this.yo !== 0) {
+				this.happiness = Math.max(0, this.happiness - 0.1);
+			}
+
 			this.move(this.xo, this.yo, map);
 
-			this.happiness = Math.max(0, this.happiness - 8 * elapsed);
+			//console.log(this.y, map.w, map.sheet.w)
+			this.depth = (this.y / map.h);// * 100;
 
 
 		},
