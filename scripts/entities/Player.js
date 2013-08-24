@@ -9,7 +9,7 @@
 
 		rotation: Ω.utils.deg2rad(0),
 		rotSpeed: Ω.utils.deg2rad(3),
-		speed: 4,
+		speed: 2,
 
 		init: function (x, y) {
 
@@ -46,6 +46,7 @@
 			}
 
 			this.move(this.xo, this.yo, map);
+
 
 		}
 
