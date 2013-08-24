@@ -9,11 +9,11 @@
 
 		rotation: Ω.utils.deg2rad(0),
 		rotSpeed: Ω.utils.deg2rad(3),
-		speed: 2,
 
 		happiness: 50,
 
 		depth: 0,
+		speed: 2,
 
 		init: function (x, y) {
 
@@ -49,15 +49,18 @@
 				this.yo = -this.speed * Math.sin(this.rotation);
 			}
 
-						// Bit sad to move
+			// Bit sad to move
 			if (this.xo !== 0 || this.yo !== 0) {
-				this.happiness = Math.max(0, this.happiness - 0.1);
+				this.happiness = Math.max(0, this.happiness - (0.1 * this.speed));
 			}
 
 			this.move(this.xo, this.yo, map);
 
 			//console.log(this.y, map.w, map.sheet.w)
 			this.depth = (this.y / map.h);// * 100;
+			this.speed = 2 * Ω.utils.lerpPerc(1, 0.4, this.depth);
+			//console.log(this.speed.toFixed(2), this.depth)
+			this.rotSpeed = Ω.utils.deg2rad(3 * Ω.utils.lerpPerc(1, 0.5, this.depth));
 
 
 		},
@@ -65,6 +68,10 @@
 		hit: function (e) {
 
 			e.remove = true;
+
+			if (e instanceof Moment) {
+				this.happiness = Math.min(100, this.happiness + 20);
+			}
 
 		}
 
