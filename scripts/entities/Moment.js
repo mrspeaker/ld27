@@ -6,9 +6,6 @@
 
 		sheet: new Ω.SpriteSheet("res/images/sprites.png", 16, 16),
 
-		w: 8,
-		h: 32,
-
 		init: function (x, y, player) {
 
 			this.rnd = Ω.utils.rand(2000);
