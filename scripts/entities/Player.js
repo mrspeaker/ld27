@@ -1,4 +1,5 @@
 (function (Ω) {
+
 	"use strict";
 
 	var Player = Ω.Entity.extend({
@@ -6,9 +7,9 @@
 		w: 5,
 		h: 5,
 
-		rotation: Ω.utils.deg2rad(230),
+		rotation: Ω.utils.deg2rad(0),
 		rotSpeed: Ω.utils.deg2rad(3),
-		speed: 2.4,
+		speed: 4,
 
 		init: function (x, y) {
 
