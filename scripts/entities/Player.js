@@ -7,8 +7,8 @@
 		h: 5,
 
 		rotation: Ω.utils.deg2rad(230),
-		rotSpeed: 0.06,
-		speed: 2,
+		rotSpeed: Ω.utils.deg2rad(3),
+		speed: 2.4,
 
 		init: function (x, y) {
 
