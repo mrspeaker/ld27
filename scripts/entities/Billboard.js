@@ -21,7 +21,7 @@
 
 			var dx = (this.x / 16 + 0.0) - this.player.x / 16,
 				dy = (this.y / 16 + 0.0) - this.player.y / 16,
-				viewDistance = map.viewDistance,
+				viewDistance = map.viewDistance / (Ω.utils.lerpPerc(1, 8, game.screen.player.depth)),
 				dist = Math.sqrt(dx * dx + dy * dy),
 				angle = Math.atan2(dy, dx) - this.player.rotation,
 				size = viewDistance / (Math.cos(angle) * dist) * 0.08,

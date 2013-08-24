@@ -29,7 +29,6 @@
 
 		tick: function (map) {
 
-			this.top = Math.sin(this.rnd + (Date.now() / 200)) * 20;
 
 			var dx = (this.x / 16 + 0.0) - this.player.x / 16,
 				dy = (this.y / 16 + 0.0) - this.player.y / 16,
@@ -39,6 +38,7 @@
 				size = viewDistance / (Math.cos(angle) * dist) * 0.08,
 				x = Math.tan(angle) * viewDistance;
 
+			this.top = (Math.sin(this.rnd + (Date.now() / 200)) * 10) * size;
 			this.dist = dist;
 			this.px = (Ω.env.w / 2 + x - size / 2);
 			this.py = ((Ω.env.h - size) / 2);

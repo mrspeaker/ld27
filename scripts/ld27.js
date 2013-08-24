@@ -19,7 +19,8 @@
 				["left", "left"],
 				["right", "right"],
 				["up", "up"],
-				["down", "down"]
+				["down", "down"],
+				["space", "fire"]
 
 			]);
 
@@ -27,7 +28,7 @@
 
 		load: function () {
 
-			this.setScreen(new MainScreen());
+			this.setScreen(new TitleScreen(), 100);
 
 		}
 
