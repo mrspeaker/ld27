@@ -4,6 +4,8 @@
 
 	var Billboard = Ω.Entity.extend({
 
+		w: 14,
+		h: 14,
 		visible: false,
 
 		init: function (x, y, player) {

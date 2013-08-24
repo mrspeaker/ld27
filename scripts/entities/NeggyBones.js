@@ -6,8 +6,8 @@
 
 		sheet: new Ω.SpriteSheet("res/images/sprites.png", 16, 16),
 
-		w: 8,
-		h: 32,
+		w: 14,
+		h: 14,
 
 		visible: false,
 

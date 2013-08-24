@@ -4,12 +4,14 @@
 
 	var Player = Ω.Entity.extend({
 
-		w: 5,
-		h: 5,
+		w: 14,
+		h: 14,
 
 		rotation: Ω.utils.deg2rad(0),
 		rotSpeed: Ω.utils.deg2rad(3),
 		speed: 2,
+
+		happiness: 50,
 
 		init: function (x, y) {
 
@@ -18,7 +20,7 @@
 
 		},
 
-		tick: function (map) {
+		tick: function (map, elapsed) {
 
 			if (Ω.input.isDown("left")) {
 				this.rotation -= this.rotSpeed;
@@ -46,6 +48,8 @@
 			}
 
 			this.move(this.xo, this.yo, map);
+
+			this.happiness = Math.max(0, this.happiness - 8 * elapsed);
 
 
 		},

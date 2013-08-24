@@ -9,7 +9,7 @@
 
 		init: function () {
 
-			this.player = new Player(16 * 2, 16 * 2);
+			this.player = new Player(16, 16);
 			this.map = new Ω.RayCastMap(this.sheet, [
 				[1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],
 				[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
@@ -43,18 +43,30 @@
 				}
 			}
 
-			this.neggies.push(new Moment(16 * 18, 16 * 13, this.player));
+			this.neggies.push(new Moment(32, 32, this.player));
+
+			this.lastTime = this.gameTime();
 
 		},
 
 		tick: function () {
 
-			this.player.tick(this.map);
+			var elapsed = this.gameTime() - this.lastTime;
+			this.lastTime = this.gameTime();
+
+			this.player.tick(this.map, elapsed);
+
 			this.neggies = this.neggies.filter(function(n) {
-				return n.tick(this.map);
+				return n.tick(this.map, elapsed);
 			}, this);
 
 			Ω.Physics.checkCollision(this.player, this.neggies);
+
+		},
+
+		gameTime: function () {
+
+			return (this.player.x / this.map.w) * 10;
 
 		},
 
@@ -74,8 +86,19 @@
 			// 	n.visible && n.render(gfx);
 			// });
 
+
+
+			c.fillStyle = "hsl(40, 70%, 70%)";
+			c.fillRect(10, 20, 130, 15);
+			c.fillRect(10, 40, 130, 15);
+
+			c.fillStyle = "hsl(10, 70%, 70%)";
+			c.fillRect(10, 20, ((10 - this.gameTime()) / 10) * 130, 15);
+			c.fillRect(10, 40, (this.player.happiness / 100) * 130, 15);
+
 			c.fillStyle = "#000";
-			c.fillText("Time:" + ((this.player.x / this.map.w) * 10).toFixed(2), 20, 20)
+			c.fillText("time: " + this.gameTime().toFixed(2), 15, 30);
+			c.fillText("happiness", 15, 50);
 
 		}
 
