@@ -56,10 +56,8 @@
 
 			this.move(this.xo, this.yo, map);
 
-			//console.log(this.y, map.w, map.sheet.w)
-			this.depth = (this.y / map.h);// * 100;
+			this.depth = (this.y / map.h);
 			this.speed = 2 * Ω.utils.lerpPerc(1, 0.4, this.depth);
-			//console.log(this.speed.toFixed(2), this.depth)
 			this.rotSpeed = Ω.utils.deg2rad(3 * Ω.utils.lerpPerc(1, 0.5, this.depth));
 
 
