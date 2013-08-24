@@ -6,8 +6,8 @@
 		w: 5,
 		h: 5,
 
-		rotation: Ω.utils.deg2rad(90),
-		rotSpeed: 0.1,
+		rotation: Ω.utils.deg2rad(230),
+		rotSpeed: 0.06,
 		speed: 2,
 
 		init: function (x, y) {
@@ -17,7 +17,7 @@
 
 		},
 
-		tick: function () {
+		tick: function (map) {
 
 			if (Ω.input.isDown("left")) {
 				this.rotation -= this.rotSpeed;
@@ -35,14 +35,16 @@
 			}
 
 			if (Ω.input.isDown("up")) {
-				this.x += this.speed * Math.cos(this.rotation);
-				this.y += this.speed * Math.sin(this.rotation);
+				this.xo = this.speed * Math.cos(this.rotation);
+				this.yo = this.speed * Math.sin(this.rotation);
 			}
 
 			if (Ω.input.isDown("down")) {
-				this.x += -this.speed * Math.cos(this.rotation);
-				this.y += -this.speed * Math.sin(this.rotation);
+				this.xo = -this.speed * Math.cos(this.rotation);
+				this.yo = -this.speed * Math.sin(this.rotation);
 			}
+
+			this.move(this.xo, this.yo, map);
 
 		}
 
