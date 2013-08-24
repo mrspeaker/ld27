@@ -48,6 +48,12 @@
 			this.move(this.xo, this.yo, map);
 
 
+		},
+
+		hit: function (e) {
+
+			e.remove = true;
+
 		}
 
 	});
