@@ -15,6 +15,7 @@
 		happiness: 50,
 
 		depth: 0,
+		bredth: 0,
 		speed: 0,
 
 

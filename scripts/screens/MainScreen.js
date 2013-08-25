@@ -83,8 +83,7 @@
 					break;
 				case "INTRO":
 					if (Ω.input.isDown("up") || Ω.input.isDown("down") || Ω.input.isDown("left") || Ω.input.isDown("right")) {
-					this.state.set("RUNNING");
-
+						this.state.set("RUNNING");
 					}
 					break;
 				case "RUNNING":
@@ -189,17 +188,20 @@
 
 				this.map.render(gfx, this.neggies);
 
-				//c.fillStyle = "hsl(40, 70%, 70%)";
-				//c.fillRect(10, 20, 130, 15);
-				//c.fillRect(10, 40, 130, 15);
+				c.fillStyle = "hsl(40, 50%, 70%)";
+				c.fillRect(90, 15, 100, 15);
+				c.fillRect(90, 35, 100, 15);
+				c.fillRect(90, 55, 100, 15);
 
 				//c.fillStyle = "hsl(10, 70%, 70%)";
 				//c.fillRect(10, 20, ((10 - this.gameTime()) / 10) * 130, 15);
 				//c.fillRect(10, 40, (this.player.happiness / 100) * 130, 15);
 
-				//c.fillStyle = "#000";
-				//c.fillText("time: " + (11 - this.gameTime() | 0), 15, 30);
-				//c.fillText("happiness", 15, 50);
+				c.fillStyle = "#000";
+				c.font = "8pt monospace";
+				c.fillText("wellbeing", 95, 25);
+				c.fillText("happiness", 95, 45);
+				c.fillText("saturation", 95, 65);
 				//c.fillText(this.player.speed.toFixed(2), 100, 50);
 
 				//c.fillText(this.player.depth.toFixed(2), 80, 30);
