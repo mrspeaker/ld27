@@ -13,9 +13,11 @@
 
 		gameIsOver: false,
 
+		state: null,
+
 		init: function () {
 
-			var Z = "Z";
+			this.state = new Ω.utils.State("BORN");
 
 			this.player = new Player(17, 16 * 3.5);
 			this.map = new Ω.RayCastMap(this.sheet, LEVEL.cells, this.player);
@@ -57,6 +59,27 @@
 
 		tick: function (delta) {
 
+			this.state.tick();
+
+			switch(this.state.get()) {
+				case "BORN":
+					this.state.set("INTRO");
+					break;
+				case "INTRO":
+					if (Ω.input.isDown("up") || Ω.input.isDown("down") || Ω.input.isDown("left") || Ω.input.isDown("right")) {
+					this.state.set("RUNNING");
+
+					}
+					break;
+				case "RUNNING":
+					this.tickRunning(delta);
+					break;
+			}
+
+		},
+
+		tickRunning: function (delta) {
+
 			var elapsed = this.gameTime() - this.lastTime;
 			this.lastTime = this.gameTime();
 
@@ -86,7 +109,6 @@
 			if (this.gameIsOver) {
 				game.reset();
 			}
-
 		},
 
 		gameTime: function () {
