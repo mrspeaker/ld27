@@ -111,7 +111,7 @@
 		hit: function (e) {
 
 			if (e instanceof Moment) {
-				this.happiness = Math.min(100, this.happiness + 20);
+				this.happiness = Math.min(100, this.happiness + 10);
 				e.remove = true;
 			}
 
