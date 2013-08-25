@@ -2,13 +2,9 @@
 
 	"use strict";
 
-	var Tree = Billboard.extend({
+	var Compass = Billboard.extend({
 
 		sheet: new Ω.SpriteSheet("res/images/sprites.png", 16, 16),
-
-		rotation: Ω.utils.deg2rad(0),
-		rotSpeed: Ω.utils.deg2rad(3),
-		speed: 4,
 
 		init: function (x, y, player) {
 
@@ -25,9 +21,19 @@
 
 			this._super(map);
 
-			this.top = Math.sin(this.rnd + (Date.now() / 200)) * 20;
+			this.top = Math.cos(this.rnd + (Date.now() / 400)) * (180 / this.dist);
 
 			return !(this.remove);
+
+		},
+
+		hit: function (e) {
+
+			if (e instanceof Player) {
+				this.remove = true;
+				e.hasCompass = true;
+				game.setDialog(new CompassDialog());
+			}
 
 		},
 
@@ -36,12 +42,12 @@
 			var c = gfx.ctx;
 
 			c.fillStyle = "hsl(220, 30%, 40%)";
-			this.sheet.render(gfx, 0, 0, this.px, this.py + this.top, 1, 1, this.size);
+			this.sheet.render(gfx, 1, 0, this.px, this.py + this.top, 1, 1, this.size);
 
 		}
 
 	});
 
-	window.NeggyBones = NeggyBones;
+	window.Compass = Compass;
 
 }(Ω));

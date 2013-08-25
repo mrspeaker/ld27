@@ -50,6 +50,9 @@
 					case "twoseconds":
 						ent = new TwoSeconds(e[2] * 16, e[1] * 16, this.player);
 						break;
+					case "compass":
+						ent = new Compass(e[2] * 16, e[1] * 16, this.player);
+						break;
 					case "player":
 						this.player.x = e[2] * 16;
 						this.player.y = e[1] * 16;
@@ -236,7 +239,7 @@
 				mid = 47,
 				angle = player.atTop ?
 					Ω.utils.deg2rad((11 - this.realTime) / 10 * 360 - 180 - 30) :
-					(player.hasCompass ? player.rotation : Math.PI - ((Date.now() / 200) % Math.PI * 2));
+					(player.hasCompass ? (Math.PI / 2)- player.rotation : Math.PI - ((Date.now() / 200) % Math.PI * 2));
 
 			c.strokeStyle = "#800";
 			c.lineWidth = 3;
