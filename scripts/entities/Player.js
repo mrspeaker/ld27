@@ -7,6 +7,8 @@
 		w: 14,
 		h: 14,
 
+		radius: 16,
+
 		rotation: Ω.utils.deg2rad(0),
 		rotSpeed: Ω.utils.deg2rad(3),
 
