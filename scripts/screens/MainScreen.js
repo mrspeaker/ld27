@@ -150,7 +150,7 @@
 			}
 
 			if (this.gameIsOver) {
-				game.reset();
+				game.setScreen(new DeadScreen());
 			}
 		},
 
@@ -193,9 +193,10 @@
 				c.fillRect(90, 35, 100, 15);
 				c.fillRect(90, 55, 100, 15);
 
-				//c.fillStyle = "hsl(10, 70%, 70%)";
-				//c.fillRect(10, 20, ((10 - this.gameTime()) / 10) * 130, 15);
-				//c.fillRect(10, 40, (this.player.happiness / 100) * 130, 15);
+				c.fillStyle = "hsl(0, 50%, 50%)";
+				c.fillRect(90, 15, (player.wellbeing / 100) * 100, 15);
+				c.fillRect(90, 35, (player.happiness / 100) * 100, 15);
+				c.fillRect(90, 55, player.depth * 100, 15);
 
 				c.fillStyle = "#000";
 				c.font = "8pt monospace";

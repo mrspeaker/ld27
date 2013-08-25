@@ -8,6 +8,9 @@
 
 		fps: false,
 
+		numDeaths: 0,
+		seenCarl: false,
+
 		init: function (w, h) {
 
 			this._super(w, h);

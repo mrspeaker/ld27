@@ -12,7 +12,8 @@
 		rotation: Ω.utils.deg2rad(0),
 		rotSpeed: Ω.utils.deg2rad(3),
 
-		happiness: 50,
+		happiness: 10,
+		wellbeing: 50,
 
 		depth: 0,
 		bredth: 0,
@@ -64,6 +65,7 @@
 
 			if (!this.atTop) {
 				this.bluePilled = true;
+				game.seenCarl = true;
 			}
 
 		},
@@ -96,8 +98,8 @@
 			}
 
 			// Bit sad to move
-			if (this.xo !== 0 || this.yo !== 0) {
-				this.happiness = Math.max(0, this.happiness - (0.1 * this.speed));
+			if (this.atTop && this.xo !== 0 || this.yo !== 0) {
+				this.happiness = Math.max(0, this.happiness - (0.05 * this.speed));
 			}
 			this.speed = this.atTop ? 1.28 : 2 * Ω.utils.lerpPerc(1, 0.4, this.depth);
 			this.rotSpeed = Ω.utils.deg2rad(3 * Ω.utils.lerpPerc(1, 0.5, this.depth));
