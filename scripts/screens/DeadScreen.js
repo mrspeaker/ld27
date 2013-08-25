@@ -53,9 +53,9 @@
 				c.fillText("You had a good run. Pretty good health.", gfx.w * 0.4, gfx.h * (0.44+ off));
 				c.fillText("At least you had your health.", gfx.w * 0.4, gfx.h * (0.51+ off));
                 c.fillText("You didn't get to touch a glowy orb thing.", gfx.w * 0.4, gfx.h * (0.58 + off));
-				c.fillText("Or " + things[Ω.utils.rand(things.length)] + ".", gfx.w * 0.4, gfx.h * (0.62 + off));
+				//c.fillText("Or " + things[Ω.utils.rand(things.length)] + ".", gfx.w * 0.4, gfx.h * (0.62 + off));
 
-				c.fillText("Maybe next time.", gfx.w * 0.4, gfx.h * (0.7 + off));
+				c.fillText("Maybe next time.", gfx.w * 0.4, gfx.h * (0.67 + off));
 
 				return;
 			}

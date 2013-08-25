@@ -99,7 +99,10 @@
 				["Hello, I'm Carl Sagan.",
 				"",
 				"You've just stepped out of time.",
-				"I hang out here none times."
+				"I hang out here none times.",
+				"",
+				"",
+				"{space for more, escape to go}"
 				],
 
 				["It can be a bit odd at first",
