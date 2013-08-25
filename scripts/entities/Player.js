@@ -15,7 +15,7 @@
 		happiness: 50,
 
 		depth: 0,
-		speed: 2,
+		speed: 0,
 
 		state: null,
 
@@ -90,7 +90,7 @@
 			if (this.xo !== 0 || this.yo !== 0) {
 				this.happiness = Math.max(0, this.happiness - (0.1 * this.speed));
 			}
-			this.speed = 2 * Ω.utils.lerpPerc(1, 0.4, this.depth);
+			this.speed = this.atTop ? 1.25 : 2 * Ω.utils.lerpPerc(1, 0.4, this.depth);
 			this.rotSpeed = Ω.utils.deg2rad(3 * Ω.utils.lerpPerc(1, 0.5, this.depth));
 
 		},

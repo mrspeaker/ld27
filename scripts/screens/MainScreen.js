@@ -49,6 +49,8 @@
 
 			this.lastTime = this.gameTime();
 
+			this.realTime = 0;
+
 			this.sound.play();
 
 		},
@@ -66,8 +68,19 @@
 
 			Ω.Physics.checkRadius(this.player, this.neggies);
 
-			if (this.gameTime() > 10 && player.atTop) {
-				player.die();
+
+			if (this.player.atTop) {
+				this.realTime += delta;
+
+				if (this.realTime > 10) {
+					this.player.die();
+					this.realTime = 10;
+				} else {
+					if (this.player.x > this.map.w - 16 * 10) {
+						//this.player.speed *= 0.8;
+					}
+
+				}
 			}
 
 			if (this.gameIsOver) {
@@ -100,20 +113,20 @@
 
 				this.map.render(gfx, this.neggies);
 
-				c.fillStyle = "hsl(40, 70%, 70%)";
-				c.fillRect(10, 20, 130, 15);
+				//c.fillStyle = "hsl(40, 70%, 70%)";
+				//c.fillRect(10, 20, 130, 15);
 				//c.fillRect(10, 40, 130, 15);
 
-				c.fillStyle = "hsl(10, 70%, 70%)";
-				c.fillRect(10, 20, ((10 - this.gameTime()) / 10) * 130, 15);
+				//c.fillStyle = "hsl(10, 70%, 70%)";
+				//c.fillRect(10, 20, ((10 - this.gameTime()) / 10) * 130, 15);
 				//c.fillRect(10, 40, (this.player.happiness / 100) * 130, 15);
 
-				c.fillStyle = "#000";
-				c.fillText("time: " + (11 - this.gameTime() | 0), 15, 30);
+				//c.fillStyle = "#000";
+				//c.fillText("time: " + (11 - this.gameTime() | 0), 15, 30);
 				//c.fillText("happiness", 15, 50);
 				//c.fillText(this.player.speed.toFixed(2), 100, 50);
 
-				c.fillText(this.player.depth.toFixed(2), 80, 30);
+				//c.fillText(this.player.depth.toFixed(2), 80, 30);
 
 				this.renderClock(gfx);
 
@@ -132,12 +145,24 @@
 
 			var c = gfx.ctx;
 
+			c.fillStyle = "#000";
+
 			this.sprites.render(gfx, 0, 2, 15, 15, 2, 2, 2);
 
-			var t = (11 - this.gameTime() | 0);
+			var t = (11 - this.realTime | 0),
+				mid = 47,
+				angle = player.atTop ?
+					Ω.utils.deg2rad((11 - this.realTime) / 10 * 360 - 180 - 30) :
+					player.rotation;
 
-
-
+			c.strokeStyle = "#800";
+			c.lineWidth = 3;
+			c.translate(mid, mid);
+			c.beginPath();
+			c.moveTo(0, 0);
+			c.lineTo(28 * Math.sin(angle), 28 * Math.cos(angle));
+			c.stroke();
+			c.translate(-mid, -mid);
 
 
 			if (t < 10) {
