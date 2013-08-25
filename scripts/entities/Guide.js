@@ -6,6 +6,8 @@
 
 		sheet: new Ω.SpriteSheet("res/images/sprites.png", 16, 16),
 
+		spoken: false,
+
 		init: function (x, y, player) {
 
 			this.x = x;
@@ -20,6 +22,30 @@
 			this._super(map);
 
 			return !(this.remove);
+
+		},
+
+		hit: function (e) {
+
+			if (!(e instanceof Player)) {
+				return;
+			}
+
+			if (this.spoken) {
+				return;
+			}
+
+			this.speak();
+
+		},
+
+		speak: function () {
+
+			game.setDialog(
+				new GuideDialog()
+			);
+
+			this.spoken = true;
 
 		},
 

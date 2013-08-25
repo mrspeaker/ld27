@@ -62,15 +62,13 @@
 			this.speed = 2 * Ω.utils.lerpPerc(1, 0.4, this.depth);
 			this.rotSpeed = Ω.utils.deg2rad(3 * Ω.utils.lerpPerc(1, 0.5, this.depth));
 
-
 		},
 
 		hit: function (e) {
 
-			e.remove = true;
-
 			if (e instanceof Moment) {
 				this.happiness = Math.min(100, this.happiness + 20);
+				e.remove = true;
 			}
 
 		}

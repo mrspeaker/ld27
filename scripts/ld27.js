@@ -20,7 +20,8 @@
 				["right", "right"],
 				["up", "up"],
 				["down", "down"],
-				["space", "fire"]
+				["space", "fire"],
+				["escape", "escape"]
 
 			]);
 
