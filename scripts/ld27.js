@@ -6,6 +6,8 @@
 
 		canvas: "#board",
 
+		fps: false,
+
 		init: function (w, h) {
 
 			this._super(w, h);

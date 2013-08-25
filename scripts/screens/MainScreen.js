@@ -5,6 +5,8 @@
 	var MainScreen = Ω.Screen.extend({
 
 		sheet: new Ω.SpriteSheet("res/images/sheet.png", 16, 16),
+		sprites: new Ω.SpriteSheet("res/images/sprites.png", 16, 16),
+
 		time: 0,
 
 		sound: new Ω.Sound("res/audio/tunke.wav", 0.8, 1),
@@ -130,10 +132,20 @@
 
 			var c = gfx.ctx;
 
-			c.lineWidth = 2;
-			c.beginPath();
-			c.arc(40,40, 40, 0, Math.PI * 2, true);
-			c.stroke();
+			this.sprites.render(gfx, 0, 2, 15, 15, 2, 2, 2);
+
+			var t = (11 - this.gameTime() | 0);
+
+
+
+
+
+			if (t < 10) {
+				t = "0" + t;
+			}
+
+			c.font = "11pt monospace";
+			c.fillText("00:" + t, 25, 50);
 
 		}
 
