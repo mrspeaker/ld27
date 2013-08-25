@@ -14,8 +14,6 @@
 
 		sheet: new Ω.SpriteSheet("res/images/sprites.png", 16, 16),
 
-		carl: new Ω.Image("res/images/carl1.png"),
-
 		spoken: false,
 
 		says: {
@@ -52,6 +50,8 @@
 			if (this.spoken) {
 				return;
 			}
+
+			e.happiness += 30;
 
 			this.speak();
 
@@ -96,14 +96,48 @@
 			var c = gfx.ctx;
 
 			var texts = [
-				"Hello, I'm Carl Sagan",
-				"You may have noticed that"
+				["Hello, I'm Carl Sagan.",
+				"",
+				"You've just stepped out of time.",
+				"I hang out here none times."
+				],
+
+				["It can be a bit odd at first",
+				"as time here is not linear,",
+				"but follows the function of a fractal."
+				],
+
+				["If you've come here looking for help",
+				"reaching the Orb-y Thingy...",
+				"I will help you."
+				],
+
+				["The Orb-y Thingy can not be reached",
+				"in your lifetime."],
+
+				["Your lifetime - in fractal time - is",
+				"almost over. But it's also just begun.",
+				"",
+				"Within fractal time lies all time.",
+				"You can pick some up and bring it back,",
+				"if you like"],
+
+				["But wandering in time can be...",
+				"challenging. I suggest you search in the",
+				"shallow time grounds for a compass to",
+				"help navigate the wobbly zones"
+				],
+
+				["Return here with your precious seconds.",
+				"",
+				"You may again run the gauntlet of time."]
+
 			]
 
 			// wasDown (and therefore pressed) aint work in dialog
 			if (Ω.input.isDown("fire") && !wasle) {
 				step++;
-				if (step >= steps) {
+				if (step >= texts.length) {
 					return false;
 				}
 			}
@@ -119,7 +153,10 @@
 
 			}
 
-			c.fillText(texts[step % texts.length], gfx.w / 2, gfx.h / 2);
+			texts[step % texts.length].forEach(function (t, i) {
+				c.fillText(t, gfx.w * 0.35, gfx.h * (0.35 + i * 0.05));
+			});
+
 
 			return true;
 

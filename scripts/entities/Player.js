@@ -23,6 +23,8 @@
 		atTop: true,
 		bluePilled: false,
 
+		hasCompass: false,
+
 		state: null,
 
 		init: function (x, y) {
@@ -98,7 +100,7 @@
 			}
 
 			// Bit sad to move
-			if (this.atTop && this.xo !== 0 || this.yo !== 0) {
+			if (this.atTop && (this.xo !== 0 || this.yo !== 0)) {
 				this.happiness = Math.max(0, this.happiness - (0.05 * this.speed));
 			}
 			this.speed = this.atTop ? 1.28 : 2 * Ω.utils.lerpPerc(1, 0.4, this.depth);

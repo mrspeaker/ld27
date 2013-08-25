@@ -4,6 +4,8 @@
 
 	var GuideDialog = Ω.Dialog.extend({
 
+		carl: new Ω.Image("res/images/carl1.png"),
+
 		init: function (talker) {
 
 			this._super();
@@ -20,6 +22,8 @@
 			c.fillRect(0, 0, gfx.w, gfx.h);
 
 			c.fillStyle = "#fff";
+
+			this.carl.render(gfx, 100, 100);
 
 			if (!this.talker(gfx)) {
 				this.done();

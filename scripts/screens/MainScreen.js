@@ -236,7 +236,7 @@
 				mid = 47,
 				angle = player.atTop ?
 					Ω.utils.deg2rad((11 - this.realTime) / 10 * 360 - 180 - 30) :
-					player.rotation;
+					(player.hasCompass ? player.rotation : Math.PI - ((Date.now() / 200) % Math.PI * 2));
 
 			c.strokeStyle = "#800";
 			c.lineWidth = 3;
