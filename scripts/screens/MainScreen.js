@@ -39,6 +39,9 @@
 					case "orb":
 						ent = new Orb(e[2] * 16, e[1] * 16, this.player);
 						break;
+					case "twoseconds":
+						ent = new TwoSeconds(e[2] * 16, e[1] * 16, this.player);
+						break;
 				}
 
 				return ent;

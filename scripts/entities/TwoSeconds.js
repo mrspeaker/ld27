@@ -27,11 +27,23 @@
 
 		},
 
+		hit: function (e) {
+
+			if (e instanceof Player) {
+				game.screen.realTime -= 2;
+				if (game.screen.realTime > 6) {
+					game.screen.realTime = 6;
+				}
+				this.remove = true;
+			}
+
+		},
+
 		render: function (gfx) {
 
 			var c = gfx.ctx;
 
-			this.sheet.render(gfx, 0, 0, this.px, this.py + this.top, 1, 1, this.size);
+			this.sheet.render(gfx, 2, 2, this.px, this.py + this.top, 2, 2, this.size);
 
 		}
 
