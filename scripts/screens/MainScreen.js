@@ -9,6 +9,8 @@
 
 		sound: new Ω.Sound("res/audio/tunke.wav", 0.8, 1),
 
+		gameIsOver: false,
+
 		init: function () {
 
 			var Z = "Z";
@@ -39,19 +41,9 @@
 
 			}, this);
 
-			// this.neggies = [];
-			// for (var i = 0; i < 35; i++) {
-			// 	var x = Ω.utils.rand(this.map.cellW),
-			// 		y = Ω.utils.rand(this.map.cellH);
-
-			// 	if (this.map.cells[y][x]=== 0) {
-			// 		this.neggies.push(
-			// 			Math.random() < 0.5 ?
-			// 				new NeggyBones(x * 16, y * 16, this.player) :
-			// 				new Moment(x * 16, y * 16, this.player)
-			// 		)
-			// 	}
-			// }
+			// Hackit up!
+			window.player = this.player;
+			window.map = this.map;
 
 			this.lastTime = this.gameTime();
 
@@ -59,7 +51,7 @@
 
 		},
 
-		tick: function () {
+		tick: function (delta) {
 
 			var elapsed = this.gameTime() - this.lastTime;
 			this.lastTime = this.gameTime();
@@ -72,11 +64,27 @@
 
 			Ω.Physics.checkRadius(this.player, this.neggies);
 
+			if (this.gameTime() > 10 && player.atTop) {
+				player.die();
+			}
+
+			if (this.gameIsOver) {
+				game.reset();
+			}
+
 		},
 
 		gameTime: function () {
 
-			return (this.player.x / this.map.w) * 10;
+			var time = (this.player.x / (this.map.w - 128)) * 10;
+
+			return this.player.atTop ? time : Math.max(0.01, time);
+
+		},
+
+		gameover: function () {
+
+			this.gameIsOver = true;
 
 		},
 
@@ -86,25 +94,46 @@
 
 			this.clear(gfx, "#111");
 
-			c.fillStyle = "#fff";
-			c.fillText("game on.", gfx.w / 2, gfx.h / 2);
+			if (!this.gameIsOver) {
 
-			this.map.render(gfx, this.neggies);
+				this.map.render(gfx, this.neggies);
 
-			c.fillStyle = "hsl(40, 70%, 70%)";
-			c.fillRect(10, 20, 130, 15);
-			c.fillRect(10, 40, 130, 15);
+				c.fillStyle = "hsl(40, 70%, 70%)";
+				c.fillRect(10, 20, 130, 15);
+				//c.fillRect(10, 40, 130, 15);
 
-			c.fillStyle = "hsl(10, 70%, 70%)";
-			c.fillRect(10, 20, ((10 - this.gameTime()) / 10) * 130, 15);
-			c.fillRect(10, 40, (this.player.happiness / 100) * 130, 15);
+				c.fillStyle = "hsl(10, 70%, 70%)";
+				c.fillRect(10, 20, ((10 - this.gameTime()) / 10) * 130, 15);
+				//c.fillRect(10, 40, (this.player.happiness / 100) * 130, 15);
 
-			c.fillStyle = "#000";
-			c.fillText("time: " + this.gameTime().toFixed(2), 15, 30);
-			c.fillText("happiness", 15, 50);
-			c.fillText(this.player.speed.toFixed(2), 100, 50);
+				c.fillStyle = "#000";
+				c.fillText("time: " + (11 - this.gameTime() | 0), 15, 30);
+				//c.fillText("happiness", 15, 50);
+				//c.fillText(this.player.speed.toFixed(2), 100, 50);
 
-			c.fillText(this.player.depth.toFixed(2), 80, 30)
+				c.fillText(this.player.depth.toFixed(2), 80, 30);
+
+				this.renderClock(gfx);
+
+			}
+
+			if (this.player.state.isIn("DYING", "DEAD")) {
+				c.fillStyle = this.player.state.is("DEAD") ?
+					"rgb(140,0,0)" :
+					"rgba(140,0,0," + ((this.player.state.count / 80)) + ")";
+				c.fillRect(0, 0, gfx.w, gfx.h);
+			}
+
+		},
+
+		renderClock: function (gfx) {
+
+			var c = gfx.ctx;
+
+			c.lineWidth = 2;
+			c.beginPath();
+			c.arc(40,40, 40, 0, Math.PI * 2, true);
+			c.stroke();
 
 		}
 

@@ -17,14 +17,49 @@
 		depth: 0,
 		speed: 2,
 
+		state: null,
+
 		init: function (x, y) {
 
 			this.x = x;
 			this.y = y;
 
+			this.state =  new Ω.utils.State("BORN");
+
 		},
 
 		tick: function (map, elapsed) {
+
+			this.state.tick();
+
+			switch (this.state.get()) {
+
+				case "BORN":
+					this.state.set("ALIVE");
+					break;
+				case "ALIVE":
+					this.tickAlive();
+					break;
+				case "DYING":
+					if (this.state.count > 80) {
+						this.state.set("DEAD");
+					}
+					break;
+				case "DEAD":
+					game.screen.gameover();
+					break;
+
+			}
+
+			this.move(this.xo, this.yo, map);
+
+			this.depth = (this.y / map.h);
+			this.bredth = (this.x / map.w);
+			this.atTop = this.y < 16 * 7;
+
+		},
+
+		tickAlive: function () {
 
 			if (Ω.input.isDown("left")) {
 				this.rotation -= this.rotSpeed;
@@ -55,10 +90,6 @@
 			if (this.xo !== 0 || this.yo !== 0) {
 				this.happiness = Math.max(0, this.happiness - (0.1 * this.speed));
 			}
-
-			this.move(this.xo, this.yo, map);
-
-			this.depth = (this.y / map.h);
 			this.speed = 2 * Ω.utils.lerpPerc(1, 0.4, this.depth);
 			this.rotSpeed = Ω.utils.deg2rad(3 * Ω.utils.lerpPerc(1, 0.5, this.depth));
 
@@ -69,6 +100,14 @@
 			if (e instanceof Moment) {
 				this.happiness = Math.min(100, this.happiness + 20);
 				e.remove = true;
+			}
+
+		},
+
+		die: function () {
+
+			if (this.state.is("ALIVE")) {
+				this.state.set("DYING");
 			}
 
 		}

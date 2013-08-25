@@ -31,6 +31,14 @@
 
 			this.setScreen(new TitleScreen(), 100);
 
+		},
+
+		reset: function () {
+
+			map = null;
+			player = null;
+			this.load();
+
 		}
 
 	});
