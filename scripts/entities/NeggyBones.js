@@ -25,7 +25,7 @@
 
 			this._super(map);
 
-			this.top = Math.sin(this.rnd + (Date.now() / 200)) * 20;
+			this.top = Math.sin(this.rnd + (Date.now() / 200)) * (180 / this.dist);
 
 			return !(this.remove);
 

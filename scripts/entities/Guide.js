@@ -10,6 +10,8 @@
 		w: 16 * 1,
 		h: 16 * 1,
 
+		radius: 15,
+
 		sheet: new Ω.SpriteSheet("res/images/sprites.png", 16, 16),
 
 		carl: new Ω.Image("res/images/carl1.png"),
@@ -43,9 +45,6 @@
 
 		hit: function (e) {
 
-
-			console.log("hit");
-
 			if (!(e instanceof Player)) {
 				return;
 			}
@@ -65,6 +64,12 @@
 			);
 
 			this.spoken = true;
+
+			map.cells[16][42] = 3;
+			map.cells[16][43] = 0;
+			map.cells[16][44] = 0;
+			map.cells[16][45] = 3;
+
 
 		},
 
