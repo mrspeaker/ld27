@@ -6,6 +6,8 @@
 
 		sheet: new Ω.SpriteSheet("res/images/sprites.png", 16, 16),
 
+		got: false,
+
 		init: function (x, y, player) {
 
 			this.rnd = Ω.utils.rand(2000);
@@ -25,6 +27,15 @@
 			this.left = Math.sin(this.rnd + (Date.now() / 200)) * (200 / this.dist) - (170 / this.dist);
 
 			return !(this.remove);
+
+		},
+
+		hit: function (e) {
+
+			if (!this.got && e instanceof Player) {
+				this.got = true;
+				game.screen.win();
+			}
 
 		},
 

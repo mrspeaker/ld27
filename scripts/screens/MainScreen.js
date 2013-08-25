@@ -77,6 +77,12 @@
 				case "RUNNING":
 					this.tickRunning(delta);
 					break;
+				case "WON":
+					if (this.state.count > 100) {
+						this.gameIsOver = true;
+						game.reset();
+					}
+					break;
 			}
 
 		},
@@ -112,6 +118,12 @@
 			if (this.gameIsOver) {
 				game.reset();
 			}
+		},
+
+		win: function () {
+
+			this.state.set("WON");
+
 		},
 
 		gameTime: function () {
