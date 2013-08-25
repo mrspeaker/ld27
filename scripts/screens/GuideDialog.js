@@ -20,7 +20,6 @@
 			c.fillRect(0, 0, gfx.w, gfx.h);
 
 			c.fillStyle = "#fff";
-			//c.fillText("Welcome, traveller.", gfx.w * 0.45, gfx.h * 0.5);
 
 			if (!this.talker(gfx)) {
 				this.done();
