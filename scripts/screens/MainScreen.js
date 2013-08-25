@@ -9,9 +9,17 @@
 
 		time: 0,
 
-		sound: new Ω.Sound("res/audio/tunke.wav", 0.8, 1),
+		sounds: {
+			"theme": new Ω.Sound("res/audio/tunke.wav", 0.8, true),
+			"tock":  new Ω.Sound("res/audio/tock.wav", 0.8, false),
+			"warning":  new Ω.Sound("res/audio/warning.wav", 0.4, true)
+		},
 
 		gameIsOver: false,
+
+		musicStarted: false,
+		tockSoundedAt: -1,
+		isWarning: false,
 
 		state: null,
 
@@ -56,8 +64,6 @@
 
 			this.realTime = 0;
 
-			this.sound.play();
-
 		},
 
 		tick: function (delta) {
@@ -79,8 +85,8 @@
 					break;
 				case "WON":
 					if (this.state.count > 100) {
-						this.gameIsOver = true;
-						game.reset();
+						this.gameover();
+						game.setScreen(new WinScreen());
 					}
 					break;
 			}
@@ -104,15 +110,37 @@
 			if (this.player.atTop) {
 				this.realTime += delta;
 
+				if (this.musicStarted) {
+					this.sounds.theme.stop();
+					this.musicStarted = false;
+				}
+
+				if (this.tockSoundedAt !== (11 - this.realTime | 0)) {
+					this.tockSoundedAt = 11 - this.realTime | 0;
+					this.sounds.tock.play();
+					if (this.tockSoundedAt < 4 && !this.isWarning) {
+						this.sounds.warning.play();
+						this.isWarning = true;
+					}
+				}
+
 				if (this.realTime > 10) {
 					this.player.die();
 					this.realTime = 10;
 				} else {
 					if (this.player.x > this.map.w - 16 * 10) {
-						//this.player.speed *= 0.8;
+
 					}
 
 				}
+			} else {
+
+				if (!this.musicStarted) {
+					this.sounds.theme.play();
+					this.sounds.warning.stop();
+					this.musicStarted = true;
+				}
+
 			}
 
 			if (this.gameIsOver) {
@@ -122,6 +150,7 @@
 
 		win: function () {
 
+			this.sounds.theme.stop();
 			this.state.set("WON");
 
 		},
@@ -137,6 +166,9 @@
 		gameover: function () {
 
 			this.gameIsOver = true;
+			this.sounds.warning.stop();
+			this.sounds.theme.stop();
+			this.sounds.tock.stop();
 
 		},
 
@@ -185,6 +217,10 @@
 			c.fillStyle = "#000";
 
 			this.sprites.render(gfx, 0, 2, 15, 15, 2, 2, 2);
+
+			if (this.state.isNot("RUNNING")) {
+				return;
+			}
 
 			var t = (11 - this.realTime | 0),
 				mid = 47,

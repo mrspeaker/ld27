@@ -6,6 +6,8 @@
 
 		sheet: new Ω.SpriteSheet("res/images/sprites.png", 16, 16),
 
+		sound: new Ω.Sound("res/audio/twosecs.wav", 0.7, false),
+
 		got: false,
 
 		init: function (x, y, player) {
@@ -35,6 +37,7 @@
 			if (!this.got && e instanceof Player) {
 				this.got = true;
 				game.screen.win();
+				this.sound.play();
 			}
 
 		},

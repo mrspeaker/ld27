@@ -7,7 +7,12 @@
 
 	Guide = Billboard.extend({
 
+		w: 16 * 1,
+		h: 16 * 1,
+
 		sheet: new Ω.SpriteSheet("res/images/sprites.png", 16, 16),
+
+		carl: new Ω.Image("res/images/carl1.png"),
 
 		spoken: false,
 
@@ -30,11 +35,16 @@
 
 			this._super(map);
 
+			this.top =  Math.cos((Date.now() / 400)) * (180 / this.dist);
+
 			return !(this.remove);
 
 		},
 
 		hit: function (e) {
+
+
+			console.log("hit");
 
 			if (!(e instanceof Player)) {
 				return;
@@ -62,7 +72,8 @@
 
 			var c = gfx.ctx;
 
-			this.sheet.render(gfx, 2, 0, this.px, this.py - 10, 1, 2, this.size);
+			this.sheet.render(gfx, 4, 0, this.px - (10 * this.size), this.py - (30 * this.size) + this.top, 3, 3, this.size);
+			//this.sheet.render(gfx, 4, 0, this.px - (30 * this.size), this.py - (60 * this.size) + this.top, 3, 3, 2 * this.size);
 
 		}
 

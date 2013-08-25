@@ -4,6 +4,8 @@
 
 	var TitleScreen = Ω.Screen.extend({
 
+		count: 0,
+
 		render: function (gfx) {
 
 			var c = gfx.ctx;
@@ -19,7 +21,9 @@
 
 		tick: function () {
 
-			if (Ω.input.isDown("fire")) {
+			this.count++;
+
+			if (this.count > 50 && Ω.input.isDown("fire")) {
 
 				game.setScreen(new MainScreen(), 100);
 

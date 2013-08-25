@@ -4,8 +4,8 @@
 
 	var Billboard = Ω.Entity.extend({
 
-		w: 14,
-		h: 14,
+		w: 16,
+		h: 16,
 
 		radius: 10,
 

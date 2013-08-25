@@ -6,6 +6,8 @@
 
 		sheet: new Ω.SpriteSheet("res/images/sprites.png", 16, 16),
 
+		sound: new Ω.Sound("res/audio/twosecs.wav", 0.7, false),
+
 		init: function (x, y, player) {
 
 			this.rnd = Ω.utils.rand(2000);
@@ -21,7 +23,7 @@
 
 			this._super(map);
 
-			this.top = Math.sin(this.rnd + (Date.now() / 200)) * 20;
+			this.top = Math.sin(this.rnd + (Date.now() / 200)) / this.size;
 
 			return !(this.remove);
 
@@ -31,10 +33,13 @@
 
 			if (e instanceof Player) {
 				game.screen.realTime -= 2;
-				if (game.screen.realTime > 6) {
-					game.screen.realTime = 6;
-				}
+				game.screen.realTime = 0; // Just reset for now, make sure enough time to win ;)
+				//if (game.screen.realTime > 6) {
+				//	game.screen.realTime = 6;
+				//}
 				this.remove = true;
+
+				this.sound.play();
 			}
 
 		},

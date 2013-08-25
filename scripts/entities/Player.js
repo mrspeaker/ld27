@@ -17,6 +17,10 @@
 		depth: 0,
 		speed: 0,
 
+
+		atTop: true,
+		bluePilled: false,
+
 		state: null,
 
 		init: function (x, y) {
@@ -56,6 +60,10 @@
 			this.depth = (this.y / map.h);
 			this.bredth = (this.x / map.w);
 			this.atTop = this.y < 16 * 7;
+
+			if (!this.atTop) {
+				this.bluePilled = true;
+			}
 
 		},
 
