@@ -7,7 +7,7 @@
 		w: 14,
 		h: 14,
 
-		radius: 20,
+		radius: 10,
 
 		visible: false,
 

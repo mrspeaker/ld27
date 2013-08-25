@@ -13,7 +13,7 @@
 
 			var Z = "Z";
 
-			this.player = new Player(17, 17);
+			this.player = new Player(17, 16 * 3.5);
 			this.map = new Ω.RayCastMap(this.sheet, LEVEL.cells, this.player);
 
 			this.neggies = LEVEL.entities.map(function (e) {
@@ -29,6 +29,9 @@
 						break;
 					case "moment":
 						ent = new Moment(e[2] * 16, e[1] * 16, this.player);
+						break;
+					case "orb":
+						ent = new Orb(e[2] * 16, e[1] * 16, this.player);
 						break;
 				}
 

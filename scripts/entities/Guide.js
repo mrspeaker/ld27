@@ -2,11 +2,20 @@
 
 	"use strict";
 
-	var Guide = Billboard.extend({
+	var intro,
+		Guide;
+
+	Guide = Billboard.extend({
 
 		sheet: new Ω.SpriteSheet("res/images/sprites.png", 16, 16),
 
 		spoken: false,
+
+		says: {
+
+			"intro": intro
+
+		},
 
 		init: function (x, y, player) {
 
@@ -42,7 +51,7 @@
 		speak: function () {
 
 			game.setDialog(
-				new GuideDialog()
+				new GuideDialog(intro)
 			);
 
 			this.spoken = true;
@@ -53,11 +62,27 @@
 
 			var c = gfx.ctx;
 
-			this.sheet.render(gfx, 2, 0, this.px, this.py, 1, 2, this.size);
+			this.sheet.render(gfx, 2, 0, this.px, this.py - 10, 1, 2, this.size);
 
 		}
 
 	});
+
+
+
+	intro = function () {
+		var tick = 0;
+		return function (gfx) {
+
+			tick++;
+			var c = gfx.ctx;
+
+			c.fillText("howdy.", gfx.w / 2, gfx.h / 2);
+
+			return tick < 100;
+
+		}
+	}
 
 	window.Guide = Guide;
 
