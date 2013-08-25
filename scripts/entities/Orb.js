@@ -21,7 +21,8 @@
 
 			this._super(map);
 
-			this.top = Math.sin(this.rnd + (Date.now() / 200)) * 20;
+			this.top = Math.cos(this.rnd + (Date.now() / 400)) * (180 / this.dist);
+			this.left = Math.sin(this.rnd + (Date.now() / 200)) * (200 / this.dist) - (170 / this.dist);
 
 			return !(this.remove);
 
@@ -30,9 +31,7 @@
 		render: function (gfx) {
 
 			var c = gfx.ctx;
-
-
-			this.sheet.render(gfx, 3, 0, this.px, this.py + this.top, 1, 1, this.size);
+			this.sheet.render(gfx, 3, 0, this.px + this.left, this.py + this.top, 1, 1, this.size);
 
 		}
 
