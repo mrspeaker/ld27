@@ -65,10 +65,9 @@
 
 			this.spoken = true;
 
+			// OPEN SESAME!
 			map.cells[16][42] = 3;
 			map.cells[16][43] = 0;
-			map.cells[16][44] = 0;
-			map.cells[16][45] = 3;
 
 
 		},

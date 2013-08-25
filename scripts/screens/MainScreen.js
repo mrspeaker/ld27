@@ -36,7 +36,6 @@
 
 				switch (e[0]) {
 					case "guide":
-						console.log(e[2], e[1])
 						ent = new Guide(e[2] * 16, e[1] * 16, this.player);
 						break;
 					case "neggy":
@@ -52,16 +51,17 @@
 						ent = new TwoSeconds(e[2] * 16, e[1] * 16, this.player);
 						break;
 					case "player":
-						console.log("yah")
-						//this.player.x = e[2] * 16;
-						//this.player.y = e[1] * 16;
+						this.player.x = e[2] * 16;
+						this.player.y = e[1] * 16;
 						break;
 
 				}
 
 				return ent;
 
-			}, this);
+			}, this).filter(function (e) {
+				return e !== null;
+			});
 
 			// Hackit up!
 			window.player = this.player;
