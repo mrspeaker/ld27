@@ -24,6 +24,8 @@
 		bluePilled: false,
 
 		hasCompass: false,
+		hasTime: false,
+		seenTheLight: false,
 
 		state: null,
 
@@ -68,6 +70,11 @@
 			if (!this.atTop) {
 				this.bluePilled = true;
 				game.seenCarl = true;
+			}
+
+			if (this.depth > 0.8 && !this.seenTheLight) {
+				this.seenTheLight = true;
+				game.screen.sounds.ooh.play();
 			}
 
 		},

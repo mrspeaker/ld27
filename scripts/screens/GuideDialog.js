@@ -29,6 +29,14 @@
 				this.done();
 			}
 
+		},
+
+		done: function () {
+
+			this._super();
+
+			game.screen.playTheme();
+
 		}
 
 	});

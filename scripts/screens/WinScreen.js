@@ -6,6 +6,14 @@
 
 		count: 0,
 
+		sound: new Ω.Sound("res/audio/ending.wav", 0.8, true),
+
+		init: function () {
+
+			this.sound.play();
+
+		},
+
 		render: function (gfx) {
 
 			var c = gfx.ctx;
@@ -14,16 +22,27 @@
 
 			c.fillStyle = "#440";
 			c.font = "11pt monospace";
-			c.fillText("Wins the game", gfx.w / 2, gfx.h / 2);
-			c.fillText("in good time.", gfx.w / 2, gfx.h * 0.53);
+
+			if (this.count < 400) {
+				c.fillText("You have! It's not often", gfx.w / 2, gfx.h / 2);
+				c.fillText("that any do.", gfx.w / 2, gfx.h * 0.53);
+			} else if (this.count < 800) {
+				c.fillText("Carl Sagan does not endorse", gfx.w / 2, gfx.h / 2);
+				c.fillText("this game.", gfx.w / 2, gfx.h * 0.53);
+
+			} else if (this.count < 1200) {
+				c.fillText("A game made in 48 linear hours", gfx.w / 2, gfx.h / 2);
+				c.fillText("by Mr Speaker.", gfx.w / 2, gfx.h * 0.53);
+			}
 
 		},
 
 		tick: function () {
 
-			if (this.count++ > 50 && Ω.input.isDown("fire")) {
+			if ((this.count++ > 50 && Ω.input.isDown("fire")) || this.count > 2000) {
 
 				game.setScreen(new TitleScreen(), 100);
+				this.sound.stop();
 
 			}
 

@@ -99,27 +99,27 @@
 				["Hello, I'm Carl Sagan.",
 				"",
 				"You've just stepped out of time.",
-				"I hang out here none times.",
+				"I hang out here nonetimes.",
 				"",
 				"",
 				"{space for more, escape to go}"
 				],
 
-				["It can be a bit odd at first",
-				"as time here is not linear,",
+				["It can be a bit odd here as",
+				"time is not linear, you see,",
 				"but follows the function of a fractal."
 				],
 
-				["If you've come here looking for help",
+				["As you've come here looking for help",
 				"reaching the Orb-y Thingy...",
-				"I will help you."
+				"Then I will help you."
 				],
 
 				["The Orb-y Thingy can not be reached",
 				"in your lifetime."],
 
 				["Your lifetime - in fractal time - is",
-				"almost over. But it's also just begun.",
+				"almost over. But it has also just begun.",
 				"",
 				"Within fractal time lies all time.",
 				"You can pick some up and bring it back,",

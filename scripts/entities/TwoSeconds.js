@@ -34,12 +34,13 @@
 			if (e instanceof Player) {
 				game.screen.realTime -= 2;
 				game.screen.realTime = 0; // Just reset for now, make sure enough time to win ;)
-				//if (game.screen.realTime > 6) {
-				//	game.screen.realTime = 6;
-				//}
 				this.remove = true;
 
+				player.hasTime = true;
+
 				this.sound.play();
+
+				game.setDialog(new TimeDialog());
 			}
 
 		},

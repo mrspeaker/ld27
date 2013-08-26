@@ -12,12 +12,14 @@
 		sounds: {
 			"theme": new Ω.Sound("res/audio/tunke.wav", 0.8, true),
 			"tock":  new Ω.Sound("res/audio/tock.wav", 0.8, false),
-			"warning":  new Ω.Sound("res/audio/warning.wav", 0.4, true)
+			"warning":  new Ω.Sound("res/audio/warning.wav", 0.4, true),
+			"ooh": new Ω.Sound("res/audio/hark.wav", 0.5, false)
 		},
 
 		gameIsOver: false,
 
 		musicStarted: false,
+		musicEverStarted: false,
 		tockSoundedAt: -1,
 		isWarning: false,
 
@@ -144,16 +146,23 @@
 				}
 			} else {
 
-				if (!this.musicStarted) {
-					this.sounds.theme.play();
-					this.sounds.warning.stop();
-					this.musicStarted = true;
+				if (this.musicEverStarted) {
+					this.playTheme();
 				}
+				this.sounds.warning.stop();
 
 			}
 
 			if (this.gameIsOver) {
 				game.setScreen(new DeadScreen());
+			}
+		},
+
+		playTheme: function () {
+			if (!this.musicStarted) {
+				this.sounds.theme.play();
+				this.musicStarted = true;
+				this.musicEverStarted = true;
 			}
 		},
 
