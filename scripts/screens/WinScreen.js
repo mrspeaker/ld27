@@ -6,7 +6,7 @@
 
 		count: 0,
 
-		sound: new Ω.Sound("res/audio/ending.wav", 0.8, true),
+		sound: new Ω.Sound("res/audio/ending", 0.8, true),
 
 		init: function () {
 

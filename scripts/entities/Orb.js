@@ -6,7 +6,7 @@
 
 		sheet: new Ω.SpriteSheet("res/images/sprites.png", 16, 16),
 
-		sound: new Ω.Sound("res/audio/twosecs.wav", 0.7, false),
+		sound: new Ω.Sound("res/audio/twosecs", 0.7, false),
 
 		got: false,
 

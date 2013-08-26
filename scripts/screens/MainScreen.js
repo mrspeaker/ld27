@@ -10,10 +10,10 @@
 		time: 0,
 
 		sounds: {
-			"theme": new Ω.Sound("res/audio/tunke.wav", 0.8, true),
-			"tock":  new Ω.Sound("res/audio/tock.wav", 0.8, false),
-			"warning":  new Ω.Sound("res/audio/warning.wav", 0.4, true),
-			"ooh": new Ω.Sound("res/audio/hark.wav", 0.5, false)
+			"theme": new Ω.Sound("res/audio/tunke", 0.8, true),
+			"tock":  new Ω.Sound("res/audio/tock", 0.8, false),
+			"warning":  new Ω.Sound("res/audio/warning", 0.4, true),
+			"ooh": new Ω.Sound("res/audio/hark", 0.5, false)
 		},
 
 		gameIsOver: false,
