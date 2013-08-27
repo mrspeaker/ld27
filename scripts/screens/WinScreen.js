@@ -39,7 +39,7 @@
 
 		tick: function () {
 
-			if ((this.count++ > 50 && Ω.input.isDown("fire")) || this.count > 2000) {
+			if ((this.count++ > 50 && Ω.input.isDown("escape")) || this.count > 2000) {
 
 				game.setScreen(new TitleScreen(), 100);
 				this.sound.stop();

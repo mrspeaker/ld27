@@ -15,8 +15,12 @@
 			c.fillStyle = "#fff";
 			c.font = "11pt monospace";
 			c.fillText("time flies straight.", gfx.w / 2, gfx.h / 2);
+
 			c.fillText("a game by Mr Speaker.", gfx.w / 2, gfx.h * 0.53);
-			c.fillText("{move: keys, start: space}", gfx.w / 2, gfx.h * 0.63);
+			c.fillText("{move: keys, start: space}", gfx.w / 2, gfx.h * 0.83);
+
+			c.fillStyle = "#777";
+			c.fillText("@mrspeaker", gfx.w / 2, gfx.h * 0.57);
 
 		},
 
