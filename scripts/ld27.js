@@ -26,7 +26,7 @@
 				["up", "up"],
 				["down", "down"],
 				["space", "fire"],
-				["escape", "escape"]
+				["enter", "escape"]
 
 			]);
 

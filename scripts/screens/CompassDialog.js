@@ -19,7 +19,7 @@
 			c.fillText("where time is so thick,", gfx.w * 0.35, gfx.h * 0.5);
 			c.fillText("you can put it in your pocket.", gfx.w * 0.35, gfx.h * 0.55);
 
-			c.fillText("{escape to continue}", gfx.w * 0.35, gfx.h * 0.65);
+			c.fillText("{enter to continue}", gfx.w * 0.35, gfx.h * 0.65);
 		}
 
 	});

@@ -19,7 +19,7 @@
 			c.fillText("Two seconds! Enough to complete", gfx.w * 0.35, gfx.h * 0.5);
 			c.fillText("your journey. Enough to complete.", gfx.w * 0.35, gfx.h * 0.55);
 
-			c.fillText("{escape to continue}", gfx.w * 0.35, gfx.h * 0.65);
+			c.fillText("{enter to continue}", gfx.w * 0.35, gfx.h * 0.65);
 
 		}
 

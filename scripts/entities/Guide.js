@@ -102,7 +102,7 @@
 				"I hang out here nonetimes.",
 				"",
 				"",
-				"{space for more, escape to go}"
+				"{space for more, enter to exit}"
 				],
 
 				["It can be a bit odd here as",
