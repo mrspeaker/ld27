@@ -41,7 +41,6 @@
 		reset: function () {
 
 			map = null;
-			player = null;
 			this.load();
 
 		}

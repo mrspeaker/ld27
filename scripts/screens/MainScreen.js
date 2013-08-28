@@ -69,7 +69,6 @@
 			});
 
 			// Hackit up!
-			window.player = this.player;
 			window.map = this.map;
 
 			this.lastTime = this.gameTime();
@@ -228,18 +227,15 @@
 				c.fillRect(90, 55, 100, 15);
 
 				c.fillStyle = "hsl(0, 50%, 50%)";
-				c.fillRect(90, 15, (player.wellbeing / 100) * 100, 15);
-				c.fillRect(90, 35, (player.happiness / 100) * 100, 15);
-				c.fillRect(90, 55, player.depth * 100, 15);
+				c.fillRect(90, 15, (this.player.wellbeing / 100) * 100, 15);
+				c.fillRect(90, 35, (this.player.happiness / 100) * 100, 15);
+				c.fillRect(90, 55, this.player.depth * 100, 15);
 
 				c.fillStyle = "#000";
 				c.font = "8pt monospace";
 				c.fillText("wellbeing", 95, 25);
 				c.fillText("happiness", 95, 45);
 				c.fillText("saturation", 95, 65);
-				//c.fillText(this.player.speed.toFixed(2), 100, 50);
-
-				//c.fillText(this.player.depth.toFixed(2), 80, 30);
 
 				this.renderClock(gfx);
 
@@ -268,9 +264,9 @@
 
 			var t = (11 - this.realTime | 0),
 				mid = 47,
-				angle = player.atTop ?
+				angle = this.player.atTop ?
 					Ω.utils.deg2rad((11 - this.realTime) / 10 * 360 - 180 - 30) :
-					(player.hasCompass ? (Math.PI / 2)- player.rotation : Math.PI - ((Date.now() / 200) % Math.PI * 2));
+					(this.player.hasCompass ? (Math.PI / 2) - this.player.rotation : Math.PI - ((Date.now() / 200) % Math.PI * 2));
 
 			c.strokeStyle = "#800";
 			c.lineWidth = 3;
