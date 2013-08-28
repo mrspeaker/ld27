@@ -36,7 +36,7 @@
 
 			if (!this.got && e instanceof Player) {
 				this.got = true;
-				game.screen.win();
+				e.win();
 				this.sound.play();
 			}
 

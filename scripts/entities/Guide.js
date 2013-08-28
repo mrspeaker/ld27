@@ -16,18 +16,16 @@
 
 		spoken: false,
 
+		// He's supposed to say something else when you get back
+		// but I ran outta time. time.
 		says: {
-
 			"intro": intro
-
 		},
 
-		init: function (x, y, player) {
+		init: function (x, y, screen) {
 
-			this.x = x;
-			this.y = y;
-
-			this.player = player;
+			this._super(x, y, screen.player);
+			this.screen = screen;
 
 		},
 
@@ -59,16 +57,23 @@
 
 		speak: function () {
 
+			var self = this;
+
 			game.setDialog(
-				new GuideDialog(intro)
+				new GuideDialog(intro, function () {
+
+					self.screen.playTheme();
+					setTimeout(function () {
+
+						// OPEN SESAME!
+						self.screen.openCarlDoor();
+
+					}, 1000);
+
+				})
 			);
 
 			this.spoken = true;
-
-			// OPEN SESAME!
-			map.cells[16][42] = 3;
-			map.cells[16][43] = 0;
-
 
 		},
 
@@ -137,7 +142,7 @@
 
 			]
 
-			// wasDown (and therefore pressed) aint work in dialog
+			// wasDown (and therefore pressed) aint work in Ω.dialog... fix it!
 			if (Ω.input.isDown("fire") && !wasle) {
 				step++;
 				if (step >= texts.length) {
@@ -146,16 +151,6 @@
 			}
 
 			wasle = Ω.input.isDown("fire");
-
-			switch (step) {
-				case 0:
-					break;
-
-				case 1:
-					break;
-
-			}
-
 			texts[step % texts.length].forEach(function (t, i) {
 				c.fillText(t, gfx.w * 0.35, gfx.h * (0.35 + i * 0.05));
 			});

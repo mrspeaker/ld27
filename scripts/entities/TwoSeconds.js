@@ -8,14 +8,13 @@
 
 		sound: new Ω.Sound("res/audio/twosecs", 0.7, false),
 
-		init: function (x, y, player) {
+		init: function (x, y, screen) {
+
+			this._super(x, y, screen.player);
+
+			this.screen = screen;
 
 			this.rnd = Ω.utils.rand(2000);
-
-			this.x = x;
-			this.y = y;
-
-			this.player = player;
 
 		},
 
@@ -32,15 +31,11 @@
 		hit: function (e) {
 
 			if (e instanceof Player) {
-				game.screen.realTime -= 2;
-				game.screen.realTime = 0; // Just reset for now, make sure enough time to win ;)
+
 				this.remove = true;
-
-				player.hasTime = true;
-
 				this.sound.play();
+				this.screen.foundTime();
 
-				game.setDialog(new TimeDialog());
 			}
 
 		},

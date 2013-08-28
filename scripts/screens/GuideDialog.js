@@ -6,11 +6,12 @@
 
 		carl: new Ω.Image("res/images/carl1.png"),
 
-		init: function (talker) {
+		init: function (talker, cb) {
 
 			this._super();
 
 			this.talker = talker();
+			this.cb = cb;
 
 		},
 
@@ -35,7 +36,7 @@
 
 			this._super();
 
-			game.screen.playTheme();
+			this.cb && this.cb();
 
 		}
 

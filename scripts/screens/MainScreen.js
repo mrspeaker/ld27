@@ -29,7 +29,7 @@
 
 			this.state = new Ω.utils.State("BORN");
 
-			this.player = new Player(17, 16 * 3.5);
+			this.player = new Player(17, 16 * 3.5, this);
 			this.map = new Ω.RayCastMap(this.sheet, LEVEL.cells, this.player);
 
 			this.neggies = LEVEL.entities.map(function (e) {
@@ -38,7 +38,7 @@
 
 				switch (e[0]) {
 					case "guide":
-						ent = new Guide(e[2] * 16, e[1] * 16, this.player);
+						ent = new Guide(e[2] * 16, e[1] * 16, this);
 						break;
 					case "neggy":
 						ent = new NeggyBones(e[2] * 16, e[1] * 16, this.player);
@@ -50,7 +50,7 @@
 						ent = new Orb(e[2] * 16, e[1] * 16, this.player);
 						break;
 					case "twoseconds":
-						ent = new TwoSeconds(e[2] * 16, e[1] * 16, this.player);
+						ent = new TwoSeconds(e[2] * 16, e[1] * 16, this);
 						break;
 					case "compass":
 						ent = new Compass(e[2] * 16, e[1] * 16, this.player);
@@ -153,6 +153,12 @@
 
 			}
 
+			// Play the spooky sound when you get down in the wobbly zone for the first time
+			if (this.player.depth > 0.8 && !this.player.seenTheLight) {
+				this.player.seenTheLight = true;
+				this.sounds.ooh.play();
+			}
+
 			if (this.gameIsOver) {
 				game.setScreen(new DeadScreen());
 			}
@@ -170,6 +176,22 @@
 
 			this.sounds.theme.stop();
 			this.state.set("WON");
+
+		},
+
+		openCarlDoor: function () {
+
+			this.map.cells[16][42] = 3;
+			this.map.cells[16][43] = 0;
+
+		},
+
+		foundTime: function () {
+
+			this.realTime -= 2;
+			this.realTime = 0; // Just reset for now, make sure enough time to win ;)
+			this.player.hasTime = true;
+			game.setDialog(new TimeDialog());
 
 		},
 
@@ -198,7 +220,7 @@
 
 			if (!this.gameIsOver) {
 
-				this.map.render(gfx, this.neggies);
+				this.map.render(gfx, this.neggies, this.player);
 
 				c.fillStyle = "hsl(40, 50%, 70%)";
 				c.fillRect(90, 15, 100, 15);

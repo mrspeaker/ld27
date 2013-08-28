@@ -29,10 +29,11 @@
 
 		state: null,
 
-		init: function (x, y) {
+		init: function (x, y, screen) {
 
 			this.x = x;
 			this.y = y;
+			this.screen = screen;
 
 			this.state =  new Ω.utils.State("BORN");
 
@@ -56,7 +57,7 @@
 					}
 					break;
 				case "DEAD":
-					game.screen.gameover();
+					this.screen.gameover();
 					break;
 
 			}
@@ -70,11 +71,6 @@
 			if (!this.atTop) {
 				this.bluePilled = true;
 				game.seenCarl = true;
-			}
-
-			if (this.depth > 0.8 && !this.seenTheLight) {
-				this.seenTheLight = true;
-				game.screen.sounds.ooh.play();
 			}
 
 		},
@@ -121,6 +117,12 @@
 				this.happiness = Math.min(100, this.happiness + 10);
 				e.remove = true;
 			}
+
+		},
+
+		win: function () {
+
+			this.screen.win();
 
 		},
 

@@ -20,6 +20,9 @@
 
 			this.clear(gfx, "#fff");
 
+			c.fillStyle = "hsla(" + (this.count / 2 % 360) + ", 50%, 40%, " + ((Math.sin(this.count / 100) + 1) / 2) + ")";
+			c.fillRect(0, 0, gfx.w, gfx.h);
+
 			c.fillStyle = "#440";
 			c.font = "11pt monospace";
 
