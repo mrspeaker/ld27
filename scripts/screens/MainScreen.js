@@ -68,9 +68,6 @@
 				return e !== null;
 			});
 
-			// Hackit up!
-			window.map = this.map;
-
 			this.lastTime = this.gameTime();
 
 			this.realTime = 0;

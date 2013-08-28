@@ -40,7 +40,6 @@
 
 		reset: function () {
 
-			map = null;
 			this.load();
 
 		}
