@@ -30,7 +30,7 @@
 			this.state = new Ω.utils.State("BORN");
 
 			this.player = new Player(17, 16 * 3.5, this);
-			this.map = new Ω.RayCastMap(this.sheet, LEVEL.cells, this.player);
+			this.map = new Ω.RayCastMap(this.sheet, LEVEL.cells, 2, 60);
 
 			this.neggies = LEVEL.entities.map(function (e) {
 
@@ -97,6 +97,8 @@
 					}
 					break;
 			}
+
+			this.map.tick(this.neggies, this.player);
 
 		},
 
@@ -216,24 +218,9 @@
 
 			if (!this.gameIsOver) {
 
+				this.renderBackground(gfx);
 				this.map.render(gfx, this.neggies, this.player);
-
-				c.fillStyle = "hsl(40, 50%, 70%)";
-				c.fillRect(90, 15, 100, 15);
-				c.fillRect(90, 35, 100, 15);
-				c.fillRect(90, 55, 100, 15);
-
-				c.fillStyle = "hsl(0, 50%, 50%)";
-				c.fillRect(90, 15, (this.player.wellbeing / 100) * 100, 15);
-				c.fillRect(90, 35, (this.player.happiness / 100) * 100, 15);
-				c.fillRect(90, 55, this.player.depth * 100, 15);
-
-				c.fillStyle = "#000";
-				c.font = "8pt monospace";
-				c.fillText("wellbeing", 95, 25);
-				c.fillText("happiness", 95, 45);
-				c.fillText("saturation", 95, 65);
-
+				this.renderStats(gfx);
 				this.renderClock(gfx);
 
 			}
@@ -244,6 +231,75 @@
 					"rgba(140,0,0," + ((this.player.state.count / 80)) + ")";
 				c.fillRect(0, 0, gfx.w, gfx.h);
 			}
+
+		},
+
+		renderStats: function (gfx) {
+
+			var c = gfx.ctx;
+
+			c.fillStyle = "hsl(40, 50%, 70%)";
+			c.fillRect(90, 15, 100, 15);
+			c.fillRect(90, 35, 100, 15);
+			c.fillRect(90, 55, 100, 15);
+
+			c.fillStyle = "hsl(0, 50%, 50%)";
+			c.fillRect(90, 15, (this.player.wellbeing / 100) * 100, 15);
+			c.fillRect(90, 35, (this.player.happiness / 100) * 100, 15);
+			c.fillRect(90, 55, this.player.depth * 100, 15);
+
+			c.fillStyle = "#000";
+			c.font = "8pt monospace";
+			c.fillText("wellbeing", 95, 25);
+			c.fillText("happiness", 95, 45);
+			c.fillText("saturation", 95, 65);
+
+		},
+
+		renderBackground: function (gfx) {
+
+			var c = gfx.ctx,
+				player = this.player,
+				sat,
+				bright;
+
+			// Sky
+			sat = player.atTop ?
+				Ω.utils.lerpPerc(80, 0, player.bredth):
+				Ω.utils.lerpPerc(60, 0, player.depth);
+
+			bright = player.atTop ?
+				Ω.utils.lerpPerc(80, 0, player.bredth):
+				Ω.utils.lerpPerc(10, 100, player.depth);
+
+			c.fillStyle = "hsl(200, " + sat + "%, " + bright + "%)";
+			c.fillRect(0, 0, gfx.w, gfx.h / 2);
+
+
+			// Ground
+			sat = Ω.utils.lerpPerc(40, 10, player.depth);
+			bright = player.atTop ?
+				Ω.utils.lerpPerc(40, 0, player.bredth):
+				Ω.utils.lerpPerc(10, 90, player.depth);
+
+			c.fillStyle = "hsl(" + Ω.utils.lerpPerc(120, 360, player.depth) + ", " + sat + "%, " + bright +  "%)";
+			c.fillRect(0, gfx.h / 2, gfx.w, gfx.h / 2);
+
+
+			// Mid
+			var top = Ω.utils.lerpPerc(0.22, 0.5, player.depth),
+				bot = Ω.utils.lerpPerc(0.55, 0.05, player.depth),
+				g = 50;
+
+			var grad = c.createLinearGradient(0, gfx.h * top, 0, gfx.h * top + gfx.h * bot);
+			grad.addColorStop(0, "hsla(180, 40%, 40%, 0)");
+			grad.addColorStop(0.5, "hsla(130, 40%, 10%, 1)");
+			grad.addColorStop(0.7, "hsla(90, 40%, 10%, 1)");
+			grad.addColorStop(1, "hsla(70, 40%, 40%, 0)");
+
+			c.fillStyle = grad;
+			c.fillRect(0, gfx.h * top, gfx.w, gfx.h * bot);
+
 
 		},
 
