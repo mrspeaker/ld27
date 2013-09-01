@@ -13,6 +13,7 @@
 		radius: 15,
 
 		sheet: new Ω.SpriteSheet("res/images/sprites.png", 16, 16),
+		sound: new Ω.Sound("res/audio/carl", 0.7, false),
 
 		spoken: false,
 
@@ -49,6 +50,7 @@
 				return;
 			}
 
+			this.sound.play();
 			e.happiness += 30;
 
 			this.speak();
