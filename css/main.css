@@ -6,8 +6,19 @@ body {
 section {
 	margin: 40px auto;
 	text-align: center;
+	width: 640px;
 }
 
+section #credits {
+	color: #555;
+	text-align: left;
+	font-size: 9pt;
+}
+
+a {
+	color: rgb(178, 84, 67);
+	text-decoration: none;
+}
 
 #fullscreenahead {
 	position: absolute;
@@ -22,7 +33,7 @@ section {
 }
 
 #fullscreenahead:before {
-	color: #555;
+	color: rgb(178, 84, 67);
 	content: "fs";
 	font-size:10pt;
 	margin-left: 11px;
