@@ -9,6 +9,12 @@ section {
 	width: 640px;
 }
 
+section canvas {
+	width: 640px;
+	height: 400px;
+	background-color: #000;
+}
+
 section #credits {
 	color: #555;
 	text-align: left;
@@ -16,8 +22,18 @@ section #credits {
 }
 
 a {
-	color: rgb(178, 84, 67);
+	color: hsl(9, 25%, 38%);
 	text-decoration: none;
+}
+
+#preload {
+	opacity: 0.4;
+	color: #fff;
+	font-family: monospace;
+	font-size: 40pt;
+	position: absolute;
+	top: 45%;
+	left: 45%;
 }
 
 #fullscreenahead {

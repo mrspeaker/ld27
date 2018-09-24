@@ -19,9 +19,15 @@
 			</span>
 		</div>
 	</section>
+	<div id="preload"></div>
 	<span id="fullscreenahead" title="go fullscreen"></span>
 
-
+	<script>
+		window.preloo = setInterval(function () {
+			var colour = "hsl(" + (Math.random() * 360 | 0) + ", 50%, 40%)";
+			document.querySelector("#board").style.background = colour;
+		}, 600);
+	</script>
 	<script src="lib/Ω.js"></script>
 	<script src="lib/utils/base.js"></script>
 	<script src="lib/utils/rays.js"></script>

@@ -16,7 +16,7 @@
 			this._super(w, h);
 
 			Ω.evt.progress.push(function (remaining, max) {
-                //console.log((((max - remaining) / max) * 100 | 0) + "%");
+                // (((max - remaining) / max) * 100 | 0);
             });
 
             Ω.input.bind([
@@ -34,9 +34,20 @@
 
 		load: function () {
 
+			this.stopPreload();
 			this.setScreen(new TitleScreen(), 100);
 
 		},
+
+		stopPreload: function () {
+
+            // Clear the preloader thing
+            if (preloo) {
+                clearInterval(preloo);
+                document.querySelector("#board").style.background = "#000";
+            }
+
+        },
 
 		reset: function () {
 
