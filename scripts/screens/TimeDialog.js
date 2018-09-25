@@ -1,30 +1,32 @@
-(function (Ω) {
+(function(Ω) {
+  "use strict";
 
-	"use strict";
+  var TimeDialog = Ω.Dialog.extend({
+    render: function(gfx) {
+      var c = gfx.ctx;
 
-	var TimeDialog = Ω.Dialog.extend({
+      c.fillStyle = "rgba(0,0,0,0.9)";
+      c.fillRect(0, 0, gfx.w, gfx.h);
 
-		render: function (gfx) {
+      c.fillStyle = "#fff";
 
-			var c = gfx.ctx;
+      c.fillText("Hark! In the depths of the ebbs", gfx.w * 0.35, gfx.h * 0.35);
+      c.fillText(
+        "and flows of movement you find...",
+        gfx.w * 0.35,
+        gfx.h * 0.4
+      );
 
-			c.fillStyle = "rgba(0,0,0,0.9)";
-			c.fillRect(0, 0, gfx.w, gfx.h);
+      c.fillText("Two seconds! Enough to complete", gfx.w * 0.35, gfx.h * 0.5);
+      c.fillText(
+        "your journey. Enough to complete.",
+        gfx.w * 0.35,
+        gfx.h * 0.55
+      );
 
-			c.fillStyle = "#fff";
+      c.fillText("{enter to continue}", gfx.w * 0.35, gfx.h * 0.65);
+    }
+  });
 
-			c.fillText("Hark! In the depths of the ebbs", gfx.w * 0.35, gfx.h * 0.35);
-			c.fillText("and flows of movement you find...", gfx.w * 0.35, gfx.h * 0.4);
-
-			c.fillText("Two seconds! Enough to complete", gfx.w * 0.35, gfx.h * 0.5);
-			c.fillText("your journey. Enough to complete.", gfx.w * 0.35, gfx.h * 0.55);
-
-			c.fillText("{enter to continue}", gfx.w * 0.35, gfx.h * 0.65);
-
-		}
-
-	});
-
-	window.TimeDialog = TimeDialog;
-
-}(Ω));
+  window.TimeDialog = TimeDialog;
+})(Ω);

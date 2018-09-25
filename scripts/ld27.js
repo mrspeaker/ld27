@@ -1,62 +1,49 @@
-(function (Ω) {
+/* global Ω, TitleScreen, preloo */
+(function(Ω) {
+  "use strict";
 
-	"use strict";
+  var LD27 = Ω.Game.extend({
+    canvas: "#board",
 
-	var LD27 = Ω.Game.extend({
+    fps: false,
 
-		canvas: "#board",
+    numDeaths: 0,
+    seenCarl: false,
 
-		fps: false,
+    init: function(w, h) {
+      this._super(w, h);
 
-		numDeaths: 0,
-		seenCarl: false,
+      Ω.evt.progress.push(function(remaining, max) {
+        (((max - remaining) / max) * 100) | 0;
+      });
 
-		init: function (w, h) {
+      Ω.input.bind([
+        ["left", "left"],
+        ["right", "right"],
+        ["up", "up"],
+        ["down", "down"],
+        ["space", "fire"],
+        ["enter", "escape"]
+      ]);
+    },
 
-			this._super(w, h);
+    load: function() {
+      this.stopPreload();
+      this.setScreen(new TitleScreen(), 100);
+    },
 
-			Ω.evt.progress.push(function (remaining, max) {
-                // (((max - remaining) / max) * 100 | 0);
-            });
+    stopPreload: function() {
+      // Clear the preloader thing
+      if (preloo) {
+        clearInterval(preloo);
+        document.querySelector("#board").style.background = "#000";
+      }
+    },
 
-            Ω.input.bind([
+    reset: function() {
+      this.load();
+    }
+  });
 
-				["left", "left"],
-				["right", "right"],
-				["up", "up"],
-				["down", "down"],
-				["space", "fire"],
-				["enter", "escape"]
-
-			]);
-
-        },
-
-		load: function () {
-
-			this.stopPreload();
-			this.setScreen(new TitleScreen(), 100);
-
-		},
-
-		stopPreload: function () {
-
-            // Clear the preloader thing
-            if (preloo) {
-                clearInterval(preloo);
-                document.querySelector("#board").style.background = "#000";
-            }
-
-        },
-
-		reset: function () {
-
-			this.load();
-
-		}
-
-	});
-
-	window.LD27 = LD27;
-
-}(Ω));
+  window.LD27 = LD27;
+})(Ω);

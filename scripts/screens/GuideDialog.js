@@ -1,47 +1,37 @@
-(function (Ω) {
+(function(Ω) {
+  "use strict";
 
-	"use strict";
+  var GuideDialog = Ω.Dialog.extend({
+    carl: new Ω.Image("res/images/carl1.png"),
 
-	var GuideDialog = Ω.Dialog.extend({
+    init: function(talker, cb) {
+      this._super();
 
-		carl: new Ω.Image("res/images/carl1.png"),
+      this.talker = talker();
+      this.cb = cb;
+    },
 
-		init: function (talker, cb) {
+    render: function(gfx) {
+      var c = gfx.ctx;
 
-			this._super();
+      c.fillStyle = "rgba(0,0,0,0.9)";
+      c.fillRect(0, 0, gfx.w, gfx.h);
 
-			this.talker = talker();
-			this.cb = cb;
+      c.fillStyle = "#fff";
 
-		},
+      this.carl.render(gfx, 100, 100);
 
-		render: function (gfx) {
+      if (!this.talker(gfx)) {
+        this.done();
+      }
+    },
 
-			var c = gfx.ctx;
+    done: function() {
+      this._super();
 
-			c.fillStyle = "rgba(0,0,0,0.9)";
-			c.fillRect(0, 0, gfx.w, gfx.h);
+      this.cb && this.cb();
+    }
+  });
 
-			c.fillStyle = "#fff";
-
-			this.carl.render(gfx, 100, 100);
-
-			if (!this.talker(gfx)) {
-				this.done();
-			}
-
-		},
-
-		done: function () {
-
-			this._super();
-
-			this.cb && this.cb();
-
-		}
-
-	});
-
-	window.GuideDialog = GuideDialog;
-
-}(Ω));
+  window.GuideDialog = GuideDialog;
+})(Ω);

@@ -1,55 +1,50 @@
-(function (Ω) {
+(function(Ω) {
+  "use strict";
 
-	"use strict";
+  var TwoSeconds = Billboard.extend({
+    sheet: new Ω.SpriteSheet("res/images/sprites.png", 16, 16),
 
-	var TwoSeconds = Billboard.extend({
+    sound: new Ω.Sound("res/audio/twosecs", 0.7, false),
 
-		sheet: new Ω.SpriteSheet("res/images/sprites.png", 16, 16),
+    init: function(x, y, screen) {
+      this._super(x, y, screen.player);
 
-		sound: new Ω.Sound("res/audio/twosecs", 0.7, false),
+      this.screen = screen;
 
-		init: function (x, y, screen) {
+      this.rnd = Ω.utils.rand(2000);
+    },
 
-			this._super(x, y, screen.player);
+    tick: function(map) {
+      this._super(map);
 
-			this.screen = screen;
+      this.top = Math.sin(this.rnd + Date.now() / 200) / this.size;
 
-			this.rnd = Ω.utils.rand(2000);
+      return !this.remove;
+    },
 
-		},
+    hit: function(e) {
+      if (e instanceof Player) {
+        this.remove = true;
+        this.sound.play();
+        this.screen.foundTime();
+      }
+    },
 
-		tick: function (map) {
+    render: function(gfx) {
+      var c = gfx.ctx;
 
-			this._super(map);
+      this.sheet.render(
+        gfx,
+        2,
+        2,
+        this.px,
+        this.py + this.top,
+        2,
+        2,
+        this.size
+      );
+    }
+  });
 
-			this.top = Math.sin(this.rnd + (Date.now() / 200)) / this.size;
-
-			return !(this.remove);
-
-		},
-
-		hit: function (e) {
-
-			if (e instanceof Player) {
-
-				this.remove = true;
-				this.sound.play();
-				this.screen.foundTime();
-
-			}
-
-		},
-
-		render: function (gfx) {
-
-			var c = gfx.ctx;
-
-			this.sheet.render(gfx, 2, 2, this.px, this.py + this.top, 2, 2, this.size);
-
-		}
-
-	});
-
-	window.TwoSeconds = TwoSeconds;
-
-}(Ω));
+  window.TwoSeconds = TwoSeconds;
+})(Ω);

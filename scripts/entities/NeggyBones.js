@@ -1,47 +1,46 @@
-(function (Ω) {
+(function(Ω) {
+  "use strict";
 
-	"use strict";
+  var NeggyBones = Billboard.extend({
+    sheet: new Ω.SpriteSheet("res/images/sprites.png", 16, 16),
 
-	var NeggyBones = Billboard.extend({
+    rotation: Ω.utils.deg2rad(0),
+    rotSpeed: Ω.utils.deg2rad(3),
+    speed: 4,
 
-		sheet: new Ω.SpriteSheet("res/images/sprites.png", 16, 16),
+    init: function(x, y, player) {
+      this.rnd = Ω.utils.rand(2000);
 
-		rotation: Ω.utils.deg2rad(0),
-		rotSpeed: Ω.utils.deg2rad(3),
-		speed: 4,
+      this.x = x;
+      this.y = y;
 
-		init: function (x, y, player) {
+      this.player = player;
+    },
 
-			this.rnd = Ω.utils.rand(2000);
+    tick: function(map) {
+      this._super(map);
 
-			this.x = x;
-			this.y = y;
+      this.top = Math.sin(this.rnd + Date.now() / 200) * (180 / this.dist);
 
-			this.player = player;
+      return !this.remove;
+    },
 
-		},
+    render: function(gfx) {
+      var c = gfx.ctx;
 
-		tick: function (map) {
+      c.fillStyle = "hsl(220, 30%, 40%)";
+      this.sheet.render(
+        gfx,
+        0,
+        0,
+        this.px,
+        this.py + this.top,
+        1,
+        1,
+        this.size
+      );
+    }
+  });
 
-			this._super(map);
-
-			this.top = Math.sin(this.rnd + (Date.now() / 200)) * (180 / this.dist);
-
-			return !(this.remove);
-
-		},
-
-		render: function (gfx) {
-
-			var c = gfx.ctx;
-
-			c.fillStyle = "hsl(220, 30%, 40%)";
-			this.sheet.render(gfx, 0, 0, this.px, this.py + this.top, 1, 1, this.size);
-
-		}
-
-	});
-
-	window.NeggyBones = NeggyBones;
-
-}(Ω));
+  window.NeggyBones = NeggyBones;
+})(Ω);

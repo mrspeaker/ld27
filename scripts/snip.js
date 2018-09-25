@@ -1,9 +1,5 @@
-(function (Ω) {
+(function(Ω) {
+  "use strict";
 
-	"use strict";
-
-	var xxx =
-
-	window.xxx = xxx;
-
-}(Ω));
+  var xxx = (window.xxx = xxx);
+})(Ω);

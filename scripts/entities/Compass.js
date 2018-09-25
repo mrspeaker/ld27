@@ -1,53 +1,50 @@
-(function (Ω) {
+(function(Ω) {
+  "use strict";
 
-	"use strict";
+  var Compass = Billboard.extend({
+    sheet: new Ω.SpriteSheet("res/images/sprites.png", 16, 16),
 
-	var Compass = Billboard.extend({
+    init: function(x, y, player) {
+      this.rnd = Ω.utils.rand(2000);
 
-		sheet: new Ω.SpriteSheet("res/images/sprites.png", 16, 16),
+      this.x = x;
+      this.y = y;
 
-		init: function (x, y, player) {
+      this.player = player;
+    },
 
-			this.rnd = Ω.utils.rand(2000);
+    tick: function(map) {
+      this._super(map);
 
-			this.x = x;
-			this.y = y;
+      this.top = Math.cos(this.rnd + Date.now() / 400) * (180 / this.dist);
 
-			this.player = player;
+      return !this.remove;
+    },
 
-		},
+    hit: function(e) {
+      if (e instanceof Player) {
+        this.remove = true;
+        e.hasCompass = true;
+        game.setDialog(new CompassDialog());
+      }
+    },
 
-		tick: function (map) {
+    render: function(gfx) {
+      var c = gfx.ctx;
 
-			this._super(map);
+      c.fillStyle = "hsl(220, 30%, 40%)";
+      this.sheet.render(
+        gfx,
+        1,
+        0,
+        this.px,
+        this.py + this.top,
+        1,
+        1,
+        this.size
+      );
+    }
+  });
 
-			this.top = Math.cos(this.rnd + (Date.now() / 400)) * (180 / this.dist);
-
-			return !(this.remove);
-
-		},
-
-		hit: function (e) {
-
-			if (e instanceof Player) {
-				this.remove = true;
-				e.hasCompass = true;
-				game.setDialog(new CompassDialog());
-			}
-
-		},
-
-		render: function (gfx) {
-
-			var c = gfx.ctx;
-
-			c.fillStyle = "hsl(220, 30%, 40%)";
-			this.sheet.render(gfx, 1, 0, this.px, this.py + this.top, 1, 1, this.size);
-
-		}
-
-	});
-
-	window.Compass = Compass;
-
-}(Ω));
+  window.Compass = Compass;
+})(Ω);
